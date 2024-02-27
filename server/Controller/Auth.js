@@ -30,67 +30,42 @@ const Signup = async (req,res) => {
     }
 }
  
-// const Login = async (req,res)=>{
-//     const { emailOrPhone, password } = req.body;
-  
-//   const user = await User.findOne({ where: { emailOrPhone } });
-//   console.log(user);
-//   if (!user) {
-//     return res.status(400).json({ message: 'Invalid email' });
-//   }
 
-//   const passwordMatch = await bcrypt.compareSync(password, user.password);
-//   console.log(passwordMatch);
-//   if (!passwordMatch) {
-//     return res.json({ message: 'Invalid password' });
-//   }
-
-
-//   const token = jwt.sign({id: user._id, emailOrPhone: user.emailOrPhone}, process.env.secretkey,
-//        {
-//           expiresIn:'1h' 
-       
-//        });
-//          res.cookie('jwt', token, { httpOnly: true });
-        
-//         return  res.json({ success: 'Login successful', token });
-    
-// }
 const Login = async (req, res) => {
-    const { emailOrPhone, password } = req.body;
-  
-    try {
-      const user = await User.findOne({Where:{ emailOrPhone }} );
-      
-  
-      if (user==null) {
-        return res.status(400).json({ message: 'Invalid email' });
-      }
-  
-      const passwordMatch = bcrypt.compareSync(password, user.password);
-    //   console.log(passwordMatch);
-  
-      if (!passwordMatch) {
-        return res.json({ message: 'Invalid password' });
-      }
-  
-      const token = jwt.sign(
-        { id: user._id, emailOrPhone: user.emailOrPhone },
-        process.env.secretkey,
-        {
-          expiresIn: '1h'
-        }
-      );
-  
-      res.cookie('jwt', token, { httpOnly: true });
-  
-      return res.json({ success: 'Login successful', token });
-    } catch (error) {
-      console.error(error);
-      return res.status(500).json({ message: 'Internal Server Error' });
+  const { emailOrPhone, password } = req.body;
+
+  try {
+    const user = await User.findOne({Where:{ emailOrPhone }} );
+    
+
+    if (!user) {
+      return res.status(400).json({ message: 'Invalid email' });
     }
-  };
+
+    const passwordMatch = bcrypt.compareSync(password, user.password);
   
+
+    if (!passwordMatch) {
+      return res.json({ message: 'Invalid password' });
+    }
+
+    const token = jwt.sign(
+      { id: user._id, emailOrPhone: user.emailOrPhone },
+      process.env.secretkey,
+      {
+        expiresIn: '1h'
+      }
+    );
+
+    res.cookie('jwt', token, { httpOnly: true });
+
+    return res.json({ success: 'Login successful', token });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+
 
 
 

@@ -1,8 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const {Signup,Login} =require('../Controller/Auth')
-// const verifyToken = require('../verifytoken')
-// const jwt = require('jsonwebtoken')
+
 
 
 

@@ -1,7 +1,7 @@
 import React from 'react'
-import {Box, Container, Stack,styled,Typography,TextField, Button,Alert,AlertTitle} from '@mui/material'
-import {GoogleLogin  } from '@react-oauth/google';
-import { jwtDecode } from "jwt-decode";
+import {Box, Container, Stack,styled,Typography,TextField, Button} from '@mui/material'
+
+
 import Img from '../images/mobile.jpg'
 import './SignUp.css'
 import { useFormik } from 'formik';
@@ -177,17 +177,7 @@ function SignUp() {
   
   <Box sx={{display:'flex',flexDirection:'column',alignItems:'center',gap:'32px',width:'300px'}}>
  
- <GoogleLogin 
-    onSuccess={credentialResponse => {
-        var credentialResponsedecode=jwtDecode(credentialResponse.credential)
-      console.log(credentialResponsedecode);
-    }}
-    onError={() => {
-      console.log('Login Failed');
-    }}
-    
-   
-  />
+
     <Box sx={{ display:'flex', alignItems:'center', gap: '6px',justifyContent:'center'}}>
     <Typography sx={{fontFamily:'popins'}}>Already have account?</Typography>
     <Typography sx={{textDecoration:'none',fontFamily:'popins',color:'black'}} component={Link} to='/login'>Log in</Typography>
