@@ -8,6 +8,7 @@ const sequelize = new Sequelize({
   username: 'sql6687040',
   password: 'GV54mSR2P6',
   database: 'sql6687040',
+  port:3306
 });
 
 const User = sequelize.define('SAM_SLMS', {
